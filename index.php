@@ -145,7 +145,7 @@
         <div class="col-lg-4 col-md-6 my-3">
 
           <div class="card border-0 shadow" style="max-width: 350px; margin: auto;">
-            <img src="img/room/1.webp" class="card-img-top">
+            <img src="img/room/deluks_single.jpg" class="card-img-top">
 
               <div class="card-body">
                 <h5>Simple Room</h5>
@@ -208,7 +208,7 @@
         <div class="col-lg-4 col-md-6 my-3">
 
           <div class="card border-0 shadow" style="max-width: 350px; margin: auto;">
-            <img src="img/room/1.webp" class="card-img-top">
+            <img src="img/room/premier.jpg" class="card-img-top">
 
               <div class="card-body">
                 <h5>Simple Room</h5>

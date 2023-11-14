@@ -28,6 +28,6 @@
       alert;
   }
 
-
+  $halaman_aktif = 'logout';
 
 ?>

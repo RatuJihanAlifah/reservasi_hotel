@@ -2,7 +2,7 @@
     <div class="row">
         <div class="col-lg-4 p-4">
           <img src="img/logo.png" width="130px" style="margin: 1px;padding: 0px">
-          <p>Booking hotel hanya di InnSight aja. Cukup pilih hotel dan kamar yang kamu mau dengan 
+          <p>Booking kamar hotel hanya di Hotel Resinda aja. Cukup pilih kamar yang kamu mau
             dengan penawaran yang terbaik.
           </p>
         </div>
