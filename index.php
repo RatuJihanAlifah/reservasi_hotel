@@ -277,7 +277,7 @@
     <br>
 
     <!-- Our Facility Hotel-->
-    <div class="container bg-white mt-5 shadow p-4 rounded">
+    <div class="container bg-white mt-5 shadow p-4 rounded" id="fasility">
       <div class="row">
       <h4 class="mb-3 fw-bold text-center">Fasility Hotel</h4>
         <div class="col-lg-3 p-4">
@@ -330,59 +330,60 @@
     <br><br>
     
     <!-- Testimony -->
-    <h4 class="mb-3 fw-bold text-center">Testimonials</h4>
-    <div class="container">
-      <div class="swiper swiper-testimonials">
-        <div class="swiper-wrapper">
-          <div class="swiper-slide bg-white p-4">
-            <div class="profile d-flex align-items-center mb-3">
-              <img src="img/features/1.jpg" width="30px">
-              <h6 class="m-0 ms-2">Faisya Revenia</h6>
+      <h4 class="mb-3 fw-bold text-center" id="testimoni">Testimoni</h4>
+      <div class="container">
+        <div class="swiper swiper-testimonials">
+          <div class="swiper-wrapper">
+            <div class="swiper-slide bg-white p-4">
+              <div class="profile d-flex align-items-center mb-3">
+                <img src="img/features/1.jpg" width="30px">
+                <h6 class="m-0 ms-2">Faisya Revenia</h6>
+              </div>
+              <p>
+                Bagus hotel nya. Kamar nya nyaman bangettt
+              </p>
+              <div class="rating">
+                <i class="bi bi-star-fill text-warning"></i>
+                <i class="bi bi-star-fill text-warning"></i>
+                <i class="bi bi-star-fill text-warning"></i>
+                <i class="bi bi-star-fill text-warning"></i>
+              </div>
             </div>
-            <p>
-              Bagus hotel nya. Kamar nya nyaman bangettt
-            </p>
-            <div class="rating">
-              <i class="bi bi-star-fill text-warning"></i>
-              <i class="bi bi-star-fill text-warning"></i>
-              <i class="bi bi-star-fill text-warning"></i>
-              <i class="bi bi-star-fill text-warning"></i>
-            </div>
-          </div>
 
-          <div class="swiper-slide bg-white p-4">
-            <div class="profile d-flex align-items-center mb-3">
-              <img src="img/features/1.jpg" width="30px">
-              <h6 class="m-0 ms-2">Faisya Revenia</h6>
+            <div class="swiper-slide bg-white p-4">
+              <div class="profile d-flex align-items-center mb-3">
+                <img src="img/features/1.jpg" width="30px">
+                <h6 class="m-0 ms-2">Faisya Revenia</h6>
+              </div>
+              <p>
+                Bagus hotel nya. Kamar nya nyaman bangettt
+              </p>
+              <div class="rating">
+                <i class="bi bi-star-fill text-warning"></i>
+                <i class="bi bi-star-fill text-warning"></i>
+                <i class="bi bi-star-fill text-warning"></i>
+                <i class="bi bi-star-fill text-warning"></i>
+              </div>
             </div>
-            <p>
-              Bagus hotel nya. Kamar nya nyaman bangettt
-            </p>
-            <div class="rating">
-              <i class="bi bi-star-fill text-warning"></i>
-              <i class="bi bi-star-fill text-warning"></i>
-              <i class="bi bi-star-fill text-warning"></i>
-              <i class="bi bi-star-fill text-warning"></i>
-            </div>
-          </div>
 
-          <div class="swiper-slide bg-white p-4">
-            <div class="profile d-flex align-items-center mb-3">
-              <img src="img/features/1.jpg" width="30px">
-              <h6 class="m-0 ms-2">Faisya Revenia</h6>
-            </div>
-            <p>
-              Bagus hotel nya. Kamar nya nyaman bangettt
-            </p>
-            <div class="rating">
-              <i class="bi bi-star-fill text-warning"></i>
-              <i class="bi bi-star-fill text-warning"></i>
-              <i class="bi bi-star-fill text-warning"></i>
-              <i class="bi bi-star-fill text-warning"></i>
+            <div class="swiper-slide bg-white p-4">
+              <div class="profile d-flex align-items-center mb-3">
+                <img src="img/features/1.jpg" width="30px">
+                <h6 class="m-0 ms-2">Faisya Revenia</h6>
+              </div>
+              <p>
+                Bagus hotel nya. Kamar nya nyaman bangettt
+              </p>
+              <div class="rating">
+                <i class="bi bi-star-fill text-warning"></i>
+                <i class="bi bi-star-fill text-warning"></i>
+                <i class="bi bi-star-fill text-warning"></i>
+                <i class="bi bi-star-fill text-warning"></i>
+              </div>
             </div>
           </div>
+          <div class="swiper-pagination"></div>
         </div>
-        <div class="swiper-pagination"></div>
       </div>
     </div>
     <br><br>
@@ -390,32 +391,39 @@
 
 
     <!-- Reach Us -->
-    <h4 class="mb-3 fw-bold text-center">Contact Us</h4>
+
+    <?php
+      $contact_q = "SELECT * FROM `contact_details` WHERE `sr_no`=?";
+      $values = [1];
+      $contact_r = mysqli_fetch_assoc(select($contact_q,$values,'i'));
+    ?>
+
+    <h4 class="mb-3 fw-bold text-center" id="contact-us">Contact Us</h4>
     <div class="container">
       <div class="row">
         <div class="col-lg-6 col-md-6 mb-5 px-4">
           <div class="bg-white rounded shadow p-4">
-            <iframe class="w-100 rounded mb-4" height="320 px" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3965.697051085713!2d107.27529727360283!3d-6.303477293685709!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e699d4600afe789%3A0x255602cda524ab18!2sResinda%20By%20Padma%20Hotels!5e0!3m2!1sid!2sid!4v1699676132475!5m2!1sid!2sid" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+            <iframe class="w-100 rounded mb-4" height="320 px" src="<?php echo $contact_r['iframe'] ?>" loading="lazy" referrerpolicy="no-referrer-when-downgrade" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
             <h6>Address</h6>
-            <a href="https://maps.app.goo.gl/CqhZa9CboZ15pzrJ6" target="_blank" class="d-inline-block text-decoration-none text-dark mb-2">
-              <i class="bi bi-geo-alt-fill"></i> Jl. Resinda Raya No.1, Purwadana, Telukjambe Timur, Karawang, Jawa Barat
+            <a href="<?php echo $contact_r['address'] ?>" target="_blank" class="d-inline-block text-decoration-none text-dark mb-2">
+              <i class="bi bi-geo-alt-fill"></i><?php echo $contact_r['address'] ?>
             </a>
             <h6 class="mt-3">Call Us</h6>
-            <a href="tel:(0267) 8622000" class="d-inline-block mb-2 text-decoration-none text-dark">
-              <i class="bi bi-telephone-fill"></i> (0267) 8622000
+            <a href="+<?php echo $contact_r['pn1'] ?>" class="d-inline-block mb-2 text-decoration-none text-dark">
+              <i class="bi bi-telephone-fill"></i> +<?php echo $contact_r['pn1'] ?>
             </a>
             <h6 class="mt-3">Email</h6>
-            <a href="mailto: reservation@resindahotel.com" class="d-inline-block mb-2 text-decoration-none text-dark">
-            <i class="bi bi-envelope-fill"></i> reservation@resindahotel.com
+            <a href="<?php echo $contact_r['email'] ?>" class="d-inline-block mb-2 text-decoration-none text-dark">
+            <i class="bi bi-envelope-fill"></i><?php echo $contact_r['email'] ?>
             </a>
             <h6 class="mt-3">Follow Us</h6>
-            <a href="#" class="d-inline-block text-dark text-decoration-none mb-2">
-              <i class="bi bi-twitter me-1"></i> Twitter
+            <a href="<?php echo $contact_r['tw'] ?>" class="d-inline-block text-dark text-decoration-none mb-2">
+              <i class="bi bi-twitter me-1"></i>twitter
             </a><br>
-            <a href="#" class="d-inline-block text-dark text-decoration-none mb-2">
-              <i class="bi bi-facebook me-1"></i> Facebook
+            <a href="<?php echo $contact_r['fb'] ?>" class="d-inline-block text-dark text-decoration-none mb-2">
+              <i class="bi bi-facebook me-1"></i>facebook
             </a><br>
-            <a href="#" class="d-inline-block text-dark text-decoration-none mb-2">
+            <a href="<?php echo $contact_r['insta'] ?>" class="d-inline-block text-dark text-decoration-none mb-2">
               <i class="bi bi-instagram me-1"></i> Instagram
             </a><br>
           </div>
