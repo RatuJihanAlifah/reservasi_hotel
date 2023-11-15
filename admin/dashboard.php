@@ -11,11 +11,11 @@
       <title>Admin Panel - Dashboard</title>
       <?php require('inc/links.php'); ?>
   </head>
-  <body>
+  <body style="background-color: #C5DCE2;">
 
     <?php require('inc/header.php') ?>
 
-    <div class="container-fluid" id="main-content">
+    <div class="container-fluid" id="main-content" >
       <div class="row">
         <div class="col-lg-10 ms-auto p-4 overflow-hidden">
           

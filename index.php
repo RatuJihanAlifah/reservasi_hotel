@@ -408,6 +408,16 @@
             <a href="mailto: reservation@resindahotel.com" class="d-inline-block mb-2 text-decoration-none text-dark">
             <i class="bi bi-envelope-fill"></i> reservation@resindahotel.com
             </a>
+            <h6 class="mt-3">Follow Us</h6>
+            <a href="#" class="d-inline-block text-dark text-decoration-none mb-2">
+              <i class="bi bi-twitter me-1"></i> Twitter
+            </a><br>
+            <a href="#" class="d-inline-block text-dark text-decoration-none mb-2">
+              <i class="bi bi-facebook me-1"></i> Facebook
+            </a><br>
+            <a href="#" class="d-inline-block text-dark text-decoration-none mb-2">
+              <i class="bi bi-instagram me-1"></i> Instagram
+            </a><br>
           </div>
         </div>
         <div class="col-lg-6 col-md-6 px-4">
@@ -428,7 +438,7 @@
               </div>
               <div class="mt-3">
                 <label class="form-label" style="font-weight: 500;">Message</label>
-                <textarea class="form-control shadow-none" rows="7" style="resize: none;"></textarea>
+                <textarea class="form-control shadow-none" rows="13" style="resize: none;"></textarea>
               </div>
               <button type="submit" class="btn btn-primary custom-bg mt-4">SEND</button>
             </form>
