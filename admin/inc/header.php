@@ -3,7 +3,7 @@
     <a href="logout.php" class="btn btn-primary btn-sm">LOG OUT</a>
 </div>
 
-<div class="col-lg-2 border-top border-secondary shadow bg-white" id="dashboard-menu">
+<div class="col-lg-2 border-secondary shadow bg-white" id="dashboard-menu">
     <nav class="navbar navbar-expand-lg navbar-secondary">
         <div class="container-fluid flex-lg-column align-items-stretch">
         <h4 class="mt-2 fw-bold">ADMIN PANEL</h4>
@@ -16,7 +16,7 @@
                 <a class="nav-link mb-2" href="dashboard.php">Dashboard</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link mb-2" href="rooms.php">Rooms</a>
+                <a class="nav-link mb-2" href="user_queries.php">User Queries</a>
             </li>
             <li class="nav-item">
                 <a class="nav-link mb-2" href="users.php">Users</a>
