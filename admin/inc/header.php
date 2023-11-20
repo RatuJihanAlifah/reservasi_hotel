@@ -22,6 +22,12 @@
                 <a class="nav-link mb-2" href="users.php">Users</a>
             </li>
             <li class="nav-item">
+                <a class="nav-link mb-2" href="facility.php">Facility</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link mb-2" href="rooms.php">Rooms</a>
+            </li>
+            <li class="nav-item">
                 <a class="nav-link mb-2 shadoww" href="settings.php">Settings</a>
             </li>
             </ul>

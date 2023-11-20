@@ -101,6 +101,19 @@
         }
     }
 
+    function selectAll($table) {
+        $con = $GLOBALS['con'];
+        $sql = "SELECT * FROM $table";
+        $result = mysqli_query($con, $sql);
+    
+        if (!$result) {
+            die("Query cannot be executed - Select All");
+        }
+    
+        return $result;
+    }
+    
+
     
 
     
