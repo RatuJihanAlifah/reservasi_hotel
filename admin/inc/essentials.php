@@ -1,5 +1,10 @@
 <?php 
 
+  define('SITE_URL', 'http://127.0.0.1/resinda/');
+  define('ROOMS_IMG_PATH', SITE_URL . 'img/rooms/');
+  define('UPLOAD_IMAGE_PATH', $_SERVER['DOCUMENT_ROOT'] . '/resinda/img/');
+  define('ROOMS_FOLDER', 'rooms/');
+
   function adminLogin()
   {
     session_start();
