@@ -79,199 +79,93 @@
     <!-- Our Room -->
     <div class="container">
       <div class="row">
-        <div class="col-lg-4 col-md-6 my-3">
 
-          <div class="card border-0 shadow" style="max-width: 350px; margin: auto;">
-            <img src="img/room/executive.jpg" class="card-img-top">
+        <?php 
+          $room_res = select("SELECT * FROM `rooms` WHERE `status`=? AND `removed`=? ORDER BY `id` DESC LIMIT 3", [1, 0], 'ii');
 
-              <div class="card-body">
-                <h5>Simple Room</h5>
-                <h6 class="mb-2 text-danger">IDR 890.000</h6>
-                <div class="features mb-1">
-                  <span class="badge rounded-pill bg-light text-dark text-wrap">
-                    2 Kamar
-                  </span>
-                  <span class="badge rounded-pill bg-light text-dark text-wrap">
-                    1 Bathroom
-                  </span>
-                  <span class="badge rounded-pill bg-light text-dark text-wrap">
-                    1 Balcony
-                  </span>
-                  <span class="badge rounded-pill bg-light text-dark text-wrap">
-                    3 Sofa
-                  </span>
-                </div>
-                <div class="facilities mb-3">
-                  <span class="badge rounded-pill bg-light text-dark text-wrap">
-                    AC
-                  </span>
-                  <span class="badge rounded-pill bg-light text-dark text-wrap">
-                    Television
-                  </span>
-                  <span class="badge rounded-pill bg-light text-dark text-wrap">
-                    Wifi
-                  </span>
-                  <span class="badge rounded-pill bg-light text-dark text-wrap">
-                    Room Heater
-                  </span>
-                </div>
-                <div class="guests mb-4">
-                  <h6 class="mb-1">Guests</h6>
-                  <span class="badge rounded-pill bg-light text-dark text-wrap">
-                    5 Adults
-                  </span>
-                  <span class="badge rounded-pill bg-light text-dark text-wrap">
-                    4 Children
-                  </span>
-                </div>
-                  <div class="rating mb-3">
-                    <div>
-                      <span class="badge rounded-pill bg-light text-primary text-wrap">
-                      Rating Rooms
-                      </span>
+          while($room_data = mysqli_fetch_assoc($room_res))
+          {
+            //get facility of room
+
+            $fac_q = mysqli_query($con,"SELECT f.name FROM `facility` f 
+              INNER JOIN `room_facility` rfea ON f.id = rfea.facility_id
+              WHERE rfea.room_id = '$room_data[id]'");
+
+            $facility_data = "";
+            while($fac_row = mysqli_fetch_assoc($fac_q)){
+              $facility_data .="<span class='badge rounded-pill bg-light text-dark text-wrap'>
+              $fac_row[name]
+              </span>";
+            }  
+            
+            //get thumbnail of image
+
+            $room_thumb = ROOMS_IMG_PATH."deluks_twin.jpg";
+            $thumb_q = mysqli_query($con,"SELECT * FROM `room_images` 
+            WHERE `room_id`='$room_data[id]' 
+            AND `thumb`='1'");
+
+            if(mysqli_num_rows($thumb_q)>0){
+              $thumb_res = mysqli_fetch_assoc($thumb_q);
+              $room_thumb = ROOMS_IMG_PATH.$thumb_res['image'];
+            }
+
+            //print room
+            echo <<<data
+              <div class="col-lg-4 col-md-6 my-3">
+
+                <div class="card border-0 shadow" style="max-width: 350px; margin: auto;">
+                  <img src="$room_thumb" class="card-img-top" style="width: 100%; height: 200px; object-fit: cover;">
+
+                    <div class="card-body">
+                      <h5>$room_data[name]</h5>
+                      <h6 class="mb-2 text-danger">IDR $room_data[price]</h6>
+                      <div class="facilities mb-3">
+                        <h6 class="mb-1">Facilities</h6>
+                        $facility_data
+                      </div>
+                      <div class="guests mb-4">
+                        <h6 class="mb-1">Guests</h6>
+                        <span class="badge rounded-pill bg-light text-dark text-wrap">
+                          $room_data[adult] Adults
+                        </span>
+                        <span class="badge rounded-pill bg-light text-dark text-wrap">
+                          $room_data[children] Children
+                        </span>
+                      </div>
+                      <div class="rating mb-3">
+                        <div>
+                          <span class="badge rounded-pill bg-light text-primary text-wrap">
+                          Rating Rooms
+                          </span>
+                        </div>
+                        <span class="badge rounded-pill bg-light">
+                          <i class="bi bi-star-fill text-warning"></i>
+                          <i class="bi bi-star-fill text-warning"></i>
+                          <i class="bi bi-star-fill text-warning"></i>
+                          <i class="bi bi-star-fill text-warning"></i>
+                        </span>
+                      </div>
+                      <div class="d-flex justify-content-evenly mb-2">
+                        <a href="#" class="btn btn-primary btn-sm">Book Now</a>
+                        <a href="room_details.php?id=$room_data[id]" class="btn btn-outline-primary btn-sm">More Details</a>
+                      </div>
                     </div>
-                    <span class="badge rounded-pill bg-light">
-                      <i class="bi bi-star-fill text-warning"></i>
-                      <i class="bi bi-star-fill text-warning"></i>
-                      <i class="bi bi-star-fill text-warning"></i>
-                      <i class="bi bi-star-fill text-warning"></i>
-                    </span>
-                  </div>
-                  <a href="#" class="btn btn-primary btn-sm">Pilih Kamar</a>
+                </div> 
               </div>
-          </div> 
-        </div>
 
-        <div class="col-lg-4 col-md-6 my-3">
 
-          <div class="card border-0 shadow" style="max-width: 350px; margin: auto;">
-            <img src="img/room/deluks_single.jpg" class="card-img-top">
+            data;
 
-              <div class="card-body">
-                <h5>Simple Room</h5>
-                <h6 class="mb-2 text-danger">IDR 890.000</h6>
-                <div class="features mb-1">
-                  <span class="badge rounded-pill bg-light text-dark text-wrap">
-                    2 Kamar
-                  </span>
-                  <span class="badge rounded-pill bg-light text-dark text-wrap">
-                    1 Bathroom
-                  </span>
-                  <span class="badge rounded-pill bg-light text-dark text-wrap">
-                    1 Balcony
-                  </span>
-                  <span class="badge rounded-pill bg-light text-dark text-wrap">
-                    3 Sofa
-                  </span>
-                </div>
-                <div class="facilities mb-3">
-                  <span class="badge rounded-pill bg-light text-dark text-wrap">
-                    AC
-                  </span>
-                  <span class="badge rounded-pill bg-light text-dark text-wrap">
-                    Television
-                  </span>
-                  <span class="badge rounded-pill bg-light text-dark text-wrap">
-                    Wifi
-                  </span>
-                  <span class="badge rounded-pill bg-light text-dark text-wrap">
-                    Room Heater
-                  </span>
-                </div>
-                <div class="guests mb-4">
-                  <h6 class="mb-1">Guests</h6>
-                  <span class="badge rounded-pill bg-light text-dark text-wrap">
-                    5 Adults
-                  </span>
-                  <span class="badge rounded-pill bg-light text-dark text-wrap">
-                    4 Children
-                  </span>
-                </div>
-                  <div class="rating mb-3">
-                    <div>
-                      <span class="badge rounded-pill bg-light text-primary text-wrap">
-                      Rating Rooms
-                      </span>
-                    </div>
-                    <span class="badge rounded-pill bg-light">
-                      <i class="bi bi-star-fill text-warning"></i>
-                      <i class="bi bi-star-fill text-warning"></i>
-                      <i class="bi bi-star-fill text-warning"></i>
-                      <i class="bi bi-star-fill text-warning"></i>
-                    </span>
-                  </div>
-                  <a href="#" class="btn btn-primary btn-sm">Pilih Kamar</a>
-              </div>
-          </div> 
-        </div>
 
-        <div class="col-lg-4 col-md-6 my-3">
+          }
 
-          <div class="card border-0 shadow" style="max-width: 350px; margin: auto;">
-            <img src="img/room/premier.jpg" class="card-img-top">
-
-              <div class="card-body">
-                <h5>Simple Room</h5>
-                <h6 class="mb-2 text-danger">IDR 890.000</h6>
-                <div class="features mb-1">
-                  <span class="badge rounded-pill bg-light text-dark text-wrap">
-                    2 Kamar
-                  </span>
-                  <span class="badge rounded-pill bg-light text-dark text-wrap">
-                    1 Bathroom
-                  </span>
-                  <span class="badge rounded-pill bg-light text-dark text-wrap">
-                    1 Balcony
-                  </span>
-                  <span class="badge rounded-pill bg-light text-dark text-wrap">
-                    3 Sofa
-                  </span>
-                </div>
-                <div class="facilities mb-3">
-                  <span class="badge rounded-pill bg-light text-dark text-wrap">
-                    AC
-                  </span>
-                  <span class="badge rounded-pill bg-light text-dark text-wrap">
-                    Television
-                  </span>
-                  <span class="badge rounded-pill bg-light text-dark text-wrap">
-                    Wifi
-                  </span>
-                  <span class="badge rounded-pill bg-light text-dark text-wrap">
-                    Room Heater
-                  </span>
-                </div>
-                <div class="guests mb-4">
-                  <h6 class="mb-1">Guests</h6>
-                  <span class="badge rounded-pill bg-light text-dark text-wrap">
-                    5 Adults
-                  </span>
-                  <span class="badge rounded-pill bg-light text-dark text-wrap">
-                    4 Children
-                  </span>
-                </div>
-                  <div class="rating mb-3">
-                    <div>
-                      <span class="badge rounded-pill bg-light text-primary text-wrap">
-                      Rating Rooms
-                      </span>
-                    </div>
-                    <span class="badge rounded-pill bg-light">
-                      <i class="bi bi-star-fill text-warning"></i>
-                      <i class="bi bi-star-fill text-warning"></i>
-                      <i class="bi bi-star-fill text-warning"></i>
-                      <i class="bi bi-star-fill text-warning"></i>
-                    </span>
-                  </div>
-                  <a href="#" class="btn btn-primary btn-sm">Pilih Kamar</a>
-              </div>
-          </div> 
-        </div>
+        ?>
         
       </div>
 
       <div class="col-lg-12 text-center mt-5">
-        <a href="rooms.php" class="btn btn-sm btn-outline-primary rounded-0 fw-bold shadow-none">Moor Hotel >>></a>
+        <a href="rooms.php" class="btn btn-sm btn-outline-primary rounded-0 fw-bold shadow-none">Moor Rooms >>></a>
       </div>   
     </div>
     <br>
