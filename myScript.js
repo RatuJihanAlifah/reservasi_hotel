@@ -1,4 +1,4 @@
-var swiper = new Swiper(".swiper-container", {
+var swiper = new swiper(".swiper-container", {
     spaceBetween: 30,
     effect: "fade",
     loop: true,

@@ -4,6 +4,8 @@
   define('ROOMS_IMG_PATH', SITE_URL . 'img/rooms/');
   define('UPLOAD_IMAGE_PATH', $_SERVER['DOCUMENT_ROOT'] . '/resinda/img/');
   define('ROOMS_FOLDER', 'rooms/');
+  define('USERS_FOLDER', 'users/');
+
 
   function adminLogin()
   {
@@ -35,7 +37,70 @@
       
   }
 
+  function uploadImage($file, $folder)
+  {
+    $targetDirectory = UPLOAD_IMAGE_PATH . $folder;
+    $targetFile = $targetDirectory . basename($file['name']);
+    $imageFileType = strtolower(pathinfo($targetFile, PATHINFO_EXTENSION));
 
-  $halaman_aktif = 'logout';
+    $allowedExtensions = array("jpg", "png", "jpeg", "gif");
+    if (!in_array($imageFileType, $allowedExtensions)) {
+        return 'inv_img'; 
+    }
+
+    if ($file['size'] > 5000000) { 
+        return 'inv_size';
+    }
+
+    if (!move_uploaded_file($file['tmp_name'], $targetFile)) {
+        return 'upd_failed'; 
+    }
+
+    return basename($file['name']);
+  }
+
+  function deleteImage($fileName, $folder)
+  {
+    $targetDirectory = $_SERVER['DOCUMENT_ROOT'] . '/resinda/img/' . $folder;
+    $targetFile = $targetDirectory . $fileName;
+
+    if (file_exists($targetFile)) {
+        if (unlink($targetFile)) {
+            return 'deleted'; 
+        } else {
+            return 'del_failed'; 
+        }
+    } else {
+        return 'not_found'; 
+    }
+  }
+
+  function uploadSVGImage($file, $folder)
+  {
+    $targetDirectory = UPLOAD_IMAGE_PATH . $folder;
+    $targetFile = $targetDirectory . basename($file['name']);
+    $imageFileType = strtolower(pathinfo($targetFile, PATHINFO_EXTENSION));
+
+    // Allow only SVG files
+    if ($imageFileType !== 'svg') {
+        return 'inv_img';
+    }
+
+    if ($file['size'] > 5000000) {
+        return 'inv_size';
+    }
+
+    if (!move_uploaded_file($file['tmp_name'], $targetFile)) {
+        return 'upd_failed';
+    }
+
+    return basename($file['name']);
+  }
+
+  
+
+  
+  
+    $halaman_aktif = 'logout';
 
 ?>
