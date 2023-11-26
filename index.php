@@ -3,7 +3,7 @@
   <head>
       <meta charset="UTF-8">
       <meta name="viewport" content="width=device-width, initial-scale=1.0">
-      <title>Inn Sight</title>
+      <title>Resinda</title>
       <?php require('inc/links.php')?>
       <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css">
   </head>
@@ -111,6 +111,18 @@
               $room_thumb = ROOMS_IMG_PATH.$thumb_res['image'];
             }
 
+
+            $book_btn = "";
+
+            if(!$settings_r['shutdown']){
+              $login=0;
+              if(isset($_SESSION['logged_in']) && $_SESSION['logged_in'] == true){
+                $login=1;
+              }
+             
+              $book_btn = "<button onclick='checkLoginToBook($login,$room_data[id])' class='btn btn-primary btn-sm'>Book Now</button>";
+            }
+
             //print room
             echo <<<data
               <div class="col-lg-4 col-md-6 my-3">
@@ -148,7 +160,7 @@
                         </span>
                       </div>
                       <div class="d-flex justify-content-evenly mb-2">
-                        <a href="#" class="btn btn-primary btn-sm">Book Now</a>
+                        $book_btn
                         <a href="room_details.php?id=$room_data[id]" class="btn btn-outline-primary btn-sm">More Details</a>
                       </div>
                     </div>

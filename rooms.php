@@ -97,6 +97,19 @@
               $room_thumb = ROOMS_IMG_PATH.$thumb_res['image'];
             }
 
+
+            $book_btn = "";
+
+            if(!$settings_r['shutdown']){
+              $login=0;
+              if(isset($_SESSION['logged_in']) && $_SESSION['logged_in'] == true){
+                $login=1;
+              }
+             
+              $book_btn = "<button onclick='checkLoginToBook($login,$room_data[id])' class='btn w-100 btn-primary btn-sm mb-2'>Book Now</button>";
+            }
+
+
             //print room
             echo <<<data
               <div class="card mb-4 border-0 shadow">
@@ -122,7 +135,7 @@
                   </div>
                   <div class="col-md-2 mt-lg-0 mt-md-0 mt-4 text-center">
                       <h6 class="mb-4">IDR $room_data[price]</h6>
-                      <a href="#" class="btn w-100 btn-primary btn-sm mb-2">Book Now</a>
+                      $book_btn
                       <a href="room_details.php?id=$room_data[id]" class="btn w-100 btn-outline-primary btn-sm">More Details</a>
                   </div>
                 </div>
