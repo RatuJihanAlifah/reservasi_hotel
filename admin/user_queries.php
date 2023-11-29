@@ -10,21 +10,19 @@
     if($frm_data['seen']=='all'){
       $q = "UPDATE `user_queries` SET `seen`=?";
       $values = [1];
-      if(update($q,$values,'ii')){
-        alert('success', 'Marked all as read!');
-      }
-      else{
-        alert('error','Operation Failed!');
+      if(update($q, $values, 'i')){
+          alert('success', 'Marked all as read!');
+      } else {
+          alert('error', 'Operation Failed!');
       }
     }
     else{
       $q = "UPDATE `user_queries` SET `seen`=? WHERE `sr_no`=?";
-      $values = [1,$frm_data['seen']];
-      if(update($q,$values,'ii')){
-        alert('success', 'Marked as read!');
-      }
-      else{
-        alert('error','Operation Failed!');
+      $values = [1, $frm_data['seen']];
+      if(update($q, $values, 'ii')){
+          alert('success', 'Marked as read!');
+      } else {
+          alert('error', 'Operation Failed!');
       }
     }
   }
