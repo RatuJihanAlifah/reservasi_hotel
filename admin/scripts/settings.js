@@ -79,7 +79,7 @@ let general_data, contacts_data;
               alert('success', 'Site has been shutdown');
             } 
             else {
-              alert('success', 'Shutdown mode off!');
+              alert('error', 'Shutdown mode off!');
             }
             get_general();
           }
