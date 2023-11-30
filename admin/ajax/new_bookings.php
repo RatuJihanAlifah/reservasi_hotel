@@ -71,19 +71,30 @@ if (isset($_POST['get_bookings']))
 }
 
 
-if (isset($_POST['assign_room'])) 
-{
+if (isset($_POST['assign_room'])) {
   $frm_data = filteration($_POST);
 
   // Pastikan room_no yang dikirim sesuai dengan kunci 'room_no'
   $query = "UPDATE `booking_order` bo INNER JOIN `booking_details` bd 
-      ON bo.booking_id = bd.booking_id SET bo.arrival = ?, bd.room_no= ? WHERE bo.booking_id = ?";
+      ON bo.booking_id = bd.booking_id 
+      SET bo.arrival = ?, bo.rate_review = ?, bd.room_no= ? WHERE bo.booking_id = ?";
 
-  $values = [1, $frm_data['room_no'], $frm_data['booking_id']];
+  $values = [1,0,$frm_data['room_no'], $frm_data['booking_id']];
 
-  $res = update($query, $values, 'isi');
-  echo ($res == 2) ? 1 : 0;
+  $res = update($query, $values, 'iisi');
+
+  // Setelah penugasan kamar berhasil, perbarui status pemesanan menjadi 'booked'
+  if ($res == 2) {
+    $update_status_query = "UPDATE `booking_order` SET `booking_status` = 'booked' WHERE `booking_id` = ?";
+    $update_status_values = [$frm_data['booking_id']];
+    $update_status_res = update($update_status_query, $update_status_values, 'i');
+
+    echo ($update_status_res == 1) ? 1 : 0; // Mengembalikan nilai 1 jika pembaruan status berhasil
+  } else {
+    echo 0;
+  }
 }
+
 
 if (isset($_POST['cancel_booking'])) 
 {

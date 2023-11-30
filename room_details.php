@@ -90,12 +90,25 @@
                   <h5 class="fw-bold">IDR $room_data[price] per night</h5>
               price;
 
+              $rating_q = "SELECT AVG(rating) AS `avg_rating` FROM `rating_review`
+                WHERE `room_id`='$room_data[id]' ORDER BY `sr_no` DESC LIMIT 20";
+
+              $rating_res = mysqli_query($con,$rating_q);
+              $rating_fetch = mysqli_fetch_assoc($rating_res);
+              
+              $rating_data = "";
+
+              if($rating_fetch['avg_rating']!==NULL)
+              {
+                for($i=1; $i<$rating_fetch['avg_rating']; $i++){
+                  $rating_data .=" <i class='bi bi-star-fill text-warning'></i>";
+                }
+              }
+
+
               echo <<<rating
                 <div class="mb-3">
-                  <i class="bi bi-star-fill text-warning"></i>
-                  <i class="bi bi-star-fill text-warning"></i>
-                  <i class="bi bi-star-fill text-warning"></i>
-                  <i class="bi bi-star-fill text-warning"></i>
+                  $rating_data
                 </div>
               rating;
 
@@ -169,21 +182,43 @@
 
         <div>
           <h5 class="mb-3">Reviews and Ratings</h5>
-          <div>
-          <div class="d-flex align-items-center mb-2">
-              <img src="img/features/1.jpg" width="30px">
-              <h6 class="m-0 ms-2">Faisya Revenia</h6>
-            </div>
-            <p>
-              Bagus hotel nya. Kamar nya nyaman bangettt
-            </p>
-            <div class="rating">
-              <i class="bi bi-star-fill text-warning"></i>
-              <i class="bi bi-star-fill text-warning"></i>
-              <i class="bi bi-star-fill text-warning"></i>
-              <i class="bi bi-star-fill text-warning"></i>
-            </div>
-          </div>
+          <?php 
+            $review_q = "SELECT rr.*, uc.full_name AS uname, r.name AS rname FROM `rating_review` rr 
+            INNER JOIN `registered_users` uc ON rr.email = uc.email
+            INNER JOIN `rooms` r ON rr.room_id = r.id
+            WHERE rr.room_id = '$room_data[id]'
+            ORDER BY `sr_no` DESC LIMIT 15";
+
+            $review_res= mysqli_query($con,$review_q);
+
+            if(mysqli_num_rows($review_res)==0){
+              echo 'No Reviews Yet !!';
+            }
+            else{
+              while($row = mysqli_fetch_assoc($review_res))
+              {
+                $stars = "<i class='bi bi-star-fill text-warning'></i> ";
+                for($i=1; $i<$row['rating']; $i++){
+                  $stars .=" <i class='bi bi-star-fill text-warning'></i>";
+                }
+
+                echo<<<reviews
+                <div class="mb-4">
+                  <div class="d-flex align-items-center mb-2">
+                    <h6 class="m-0 fw-bold">$row[uname]</h6>
+                  </div>
+                  <p class="mb-1">
+                    $row[review]
+                  </p>
+                  <div class="rating">
+                    $stars
+                  </div>
+                </div>
+                reviews;
+              }  
+            }  
+          ?>
+          
         </div>
       </div>
 

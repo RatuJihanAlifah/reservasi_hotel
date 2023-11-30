@@ -99,11 +99,11 @@
         <div class="modal-body">
             <div class="mb-3">
                 <label class="form-label">Email or Username</label>
-                <input name="email_username" type="email" class="form-control shadow-one">
+                <input name="email_username" type="email" class="form-control shadow-one" autocomplete="current-password">
             </div>
             <div class="mb-3">
                 <label class="form-label">Password</label>
-                <input name="password" type="password" class="form-control shadow-none">
+                <input name="password" type="password" class="form-control shadow-none" autocomplete="current-password">
             </div>
             <div class="d-flex align-items-center justify-content-between mb-2">
                 <button type="submit" class="btn btn-primary" name="login">LOGIN</button>
@@ -136,11 +136,11 @@
               </div>
               <div class="col-md-6 ps-0 mb-3">
                 <label class="form-label">Email</label>
-                <input name="email" type="email" class="form-control shadow-one" required>
+                <input name="email" type="email" class="form-control shadow-one" autocomplete="current-password" required>
               </div>
               <div class="col-md-6 ps-0 mb-3">
                 <label class="form-label">Password</label>
-                <input name="password" type="password" class="form-control shadow-one" required>
+                <input name="password" type="password" class="form-control shadow-one" autocomplete="current-password" required >
               </div>
               <div class="text-center my-1">
                 <button type="submit" class="btn btn-primary" name="register">REGISTER</button>

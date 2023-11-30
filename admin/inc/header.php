@@ -34,10 +34,13 @@
             </div>
           </li>
           <li class="nav-item">
+            <a class="nav-link mb-2" href="users.php">Users</a>
+          </li>
+          <li class="nav-item">
             <a class="nav-link mb-2" href="user_queries.php">User Queries</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link mb-2" href="users.php">Users</a>
+            <a class="nav-link mb-2" href="rate_review.php">Ratings & Reviews</a>
           </li>
           <li class="nav-item">
             <a class="nav-link mb-2" href="facility.php">Facility</a>

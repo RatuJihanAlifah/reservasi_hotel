@@ -123,6 +123,29 @@
               $book_btn = "<button onclick='checkLoginToBook($login,$room_data[id])' class='btn btn-primary btn-sm'>Book Now</button>";
             }
 
+            $rating_q = "SELECT AVG(rating) AS `avg_rating` FROM `rating_review`
+              WHERE `room_id`='$room_data[id]' ORDER BY `sr_no` DESC LIMIT 20";
+
+            $rating_res = mysqli_query($con,$rating_q);
+            $rating_fetch = mysqli_fetch_assoc($rating_res);
+            
+            $rating_data = "";
+
+            if($rating_fetch['avg_rating']!==NULL)
+            {
+              $rating_data = "<div class='rating mb-4'>
+              <h6 class='mb-1'>Rating</h6>
+              <span class='badge rounded-pill bg-light'>";
+
+              for($i=0; $i< $rating_fetch['avg_rating']; $i++){
+                $rating_data .="<i class='bi bi-star-fill text-warning'></i>";
+              }
+                $rating_data .="</span>
+                </div>";
+            }
+
+
+
             //print room
             echo <<<data
               <div class="col-lg-4 col-md-6 my-3">
@@ -146,19 +169,7 @@
                           $room_data[children] Children
                         </span>
                       </div>
-                      <div class="rating mb-3">
-                        <div>
-                          <span class="badge rounded-pill bg-light text-primary text-wrap">
-                          Rating Rooms
-                          </span>
-                        </div>
-                        <span class="badge rounded-pill bg-light">
-                          <i class="bi bi-star-fill text-warning"></i>
-                          <i class="bi bi-star-fill text-warning"></i>
-                          <i class="bi bi-star-fill text-warning"></i>
-                          <i class="bi bi-star-fill text-warning"></i>
-                        </span>
-                      </div>
+                      $rating_data
                       <div class="d-flex justify-content-evenly mb-2">
                         $book_btn
                         <a href="room_details.php?id=$room_data[id]" class="btn btn-outline-primary btn-sm">More Details</a>
@@ -241,53 +252,43 @@
       <div class="container">
         <div class="swiper swiper-testimonials">
           <div class="swiper-wrapper">
-            <div class="swiper-slide bg-white p-4">
-              <div class="profile d-flex align-items-center mb-3">
-                <img src="img/features/1.jpg" width="30px">
-                <h6 class="m-0 ms-2">Faisya Revenia</h6>
-              </div>
-              <p>
-                Bagus hotel nya. Kamar nya nyaman bangettt
-              </p>
-              <div class="rating">
-                <i class="bi bi-star-fill text-warning"></i>
-                <i class="bi bi-star-fill text-warning"></i>
-                <i class="bi bi-star-fill text-warning"></i>
-                <i class="bi bi-star-fill text-warning"></i>
-              </div>
-            </div>
+            <?php
+            
+              $review_q = "SELECT rr.*, uc.full_name AS uname, r.name AS rname FROM `rating_review` rr 
+                INNER JOIN `registered_users` uc ON rr.email = uc.email
+                INNER JOIN `rooms` r ON rr.room_id = r.id
+                ORDER BY `sr_no` DESC LIMIT 6";
 
-            <div class="swiper-slide bg-white p-4">
-              <div class="profile d-flex align-items-center mb-3">
-                <img src="img/features/1.jpg" width="30px">
-                <h6 class="m-0 ms-2">Faisya Revenia</h6>
-              </div>
-              <p>
-                Bagus hotel nya. Kamar nya nyaman bangettt
-              </p>
-              <div class="rating">
-                <i class="bi bi-star-fill text-warning"></i>
-                <i class="bi bi-star-fill text-warning"></i>
-                <i class="bi bi-star-fill text-warning"></i>
-                <i class="bi bi-star-fill text-warning"></i>
-              </div>
-            </div>
+              $review_res= mysqli_query($con,$review_q);
 
-            <div class="swiper-slide bg-white p-4">
-              <div class="profile d-flex align-items-center mb-3">
-                <img src="img/features/1.jpg" width="30px">
-                <h6 class="m-0 ms-2">Faisya Revenia</h6>
-              </div>
-              <p>
-                Bagus hotel nya. Kamar nya nyaman bangettt
-              </p>
-              <div class="rating">
-                <i class="bi bi-star-fill text-warning"></i>
-                <i class="bi bi-star-fill text-warning"></i>
-                <i class="bi bi-star-fill text-warning"></i>
-                <i class="bi bi-star-fill text-warning"></i>
-              </div>
-            </div>
+              if(mysqli_num_rows($review_res)==0){
+                echo 'No Reviews Yet !!';
+              }
+              else{
+                while($row = mysqli_fetch_assoc($review_res))
+                {
+                  $stars = "<i class='bi bi-star-fill text-warning'></i> ";
+                  for($i=1; $i<$row['rating']; $i++){
+                    $stars .=" <i class='bi bi-star-fill text-warning'></i>";
+                  }
+
+                  echo <<<slides
+                    <div class="swiper-slide bg-white p-4">
+                      <div class="profile d-flex align-items-center mb-3">
+                        <h6 class="m-0 ms-2 fw-bold">$row[uname]</h6>
+                      </div>
+                      <p>
+                        $row[review]
+                      </p>
+                      <div class="rating">
+                        $stars
+                      </div>
+                    </div>
+                  slides;
+                }
+              }
+            ?>
+            
           </div>
           <div class="swiper-pagination"></div>
         </div>
