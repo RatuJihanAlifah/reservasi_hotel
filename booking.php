@@ -94,45 +94,14 @@
                             <li class="list-group-item text-center">No booking details available.</li>
                         <?php endif; ?>
                     </ul>
-                    <div class="d-flex justify-content-between mt-3">
-                        <button onclick="confirmRefund()" class="btn btn-danger">Refund</button>
-                        <a href="#" class="btn btn-primary">Order Confirmation</a>
+                    <div class="d-flex justify-content-center mt-3">
+                        <a href="bookings.php" class="btn btn-primary">Go to Booking</a>
                     </div>
                 </div>
             </div>
         </div>
     </div>
 </div>
-
-<script>
-    function confirmRefund() {
-        if (confirm('Are you sure you want to cancel the room booking?')) {
-            refundBooking();
-        }
-    }
-
-    function refundBooking() {
-        fetch('refund.php', {
-            method: 'POST',
-            body: JSON.stringify({ refund: true }),
-            headers: {
-                'Content-Type': 'application/json'
-            }
-        })
-        .then(response => {
-            if (response.ok) {
-                console.log('Booking successfully refunded and removed from the database.');
-                window.location.href = 'index.php'; // Redirect to index after successful refund
-            } else {
-                console.error('Failed to refund or remove booking.');
-            }
-        })
-        .catch(error => {
-            console.error('An error occurred:', error);
-        });
-    }
-
-</script>
 
 <?php require('inc/footer.php') ?>
 </body>
